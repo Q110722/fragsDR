@@ -10,12 +10,12 @@ n4 = 1760 * 5
 n5 = 1920 * 5
 
 # 데이터. 드랍, 조각, 마리수
-a = np.array([126, 234, 276, 326, 154, 174, 194, 264])
+a = np.array([1.26, 2.34, 2.76, 3.26, 1.54, 1.74, 1.94, 2.64])
 item_counts = np.array([7.04, 8.4, 10.5, 11.6, 432 / 68, 383 / 53, 423 / 52, 446 / 48])
 mob_counts = np.array([n, n, n2, n2, n3, n3, n4, n5])
 
 # 데이터 병합
-all_a_values = np.concatenate([a, data_add_inven_2366485])
+all_a_values = np.concatenate([a, data_add_inven_2366485/100])
 all_item_counts = np.concatenate([item_counts, fourth_column_frags_values / 4])
 all_mob_counts = np.concatenate([mob_counts, sixth_column_values / 4])
 
