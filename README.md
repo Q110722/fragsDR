@@ -11,4 +11,4 @@ https://www.inven.co.kr/board/maple/5974/3220174 상단2개, 댓글란2개
 표본 턱없이 부족 (편차가 커서)
 
 https://tinyurl.com/yn7o824d 0.06%라면
-https://tinyurl.com/yrg65yz8 0.01~0.1%
+https://tinyurl.com/yrg65yz8 0.01~0.1% 각 계수b
