@@ -10,13 +10,13 @@ n4 = 1760 * 5
 n5 = 1920 * 5
 
 # 데이터. 드랍, 조각, 마리수
-a = np.array([126, 234, 276, 326, 154, 174, 194, 264])
+a = np.array([1.26, 2.34, 2.76, 3.26, 1.54, 1.74, 1.94, 2.64])
 item_counts = np.array([7.04, 8.4, 10.5, 11.6, 432 / 68, 383 / 53, 423 / 52, 446 / 48])
 mob_counts = np.array([n, n, n2, n2, n3, n3, n4, n5])
 
 
 # 데이터 병합소
-all_a_values = np.concatenate([a, data_add_inven_2366485])
+all_a_values = np.concatenate([a, data_add_inven_2366485/100])
 all_item_counts = np.concatenate([item_counts,fourth_column_frags_values/4])
 all_mob_counts = np.concatenate([mob_counts,sixth_column_values/4])
 """all_a_values = a
@@ -37,7 +37,7 @@ final_probabilities = all_item_counts / all_mob_counts
 def final_probability_model(a, b):
     return p_fixed * (1 + b * np.log10(a + 1))
 
-# 최소 자승법 모델 
+# 최소 자승법 모델
 popt, pcov = curve_fit(final_probability_model, all_a_values, final_probabilities, bounds=(0, np.inf))
 optimal_b = popt[0]
 
@@ -49,17 +49,18 @@ def updated_final_probability_model(a):
 print(f"아드0% 조각드랍율 : {updated_final_probability_model(0)*100}%")
 print(f"Optimal b value: {optimal_b}")
 
-
 # 최종 확률 모델 그래프
-a_values_for_plot = np.linspace(0, 450, 1000)
+a_values_for_plot = np.linspace(0, 4, 1000)
 final_probabilities_for_plot = updated_final_probability_model(a_values_for_plot)
 
 # 데이터
 plt.scatter(all_a_values, final_probabilities, label='Actual Data', color='blue')
+mid = np.median(all_a_values)
 
 # 로그선
 plt.plot(a_values_for_plot, final_probabilities_for_plot, label='Final Probability Model', color='red')
-
+plt.text(0, updated_final_probability_model(mid), f'drop {mid*100:.0f}%: {updated_final_probability_model(mid)*100:.5f}%', color='green', fontsize=12, va = 'bottom', ha='left')
+plt.text(0, updated_final_probability_model(0), f'erda: {updated_final_probability_model(0)*100:.2f}%', color='green', fontsize=12, va = 'top', ha='left')
 plt.xlabel('Equipment Effect (a)')
 plt.ylabel('Final Probability')
 plt.title('Final Probability Model')
