@@ -1,0 +1,49 @@
+import numpy as np
+from scipy.optimize import curve_fit
+import matplotlib.pyplot as plt
+
+# 마리수 임시 합병용 데이터
+n = 9000
+n2 = 9500
+n3 = 1630 * 5
+n4 = 1760 * 5
+n5 = 1920 * 5
+
+# 데이터. 드랍, 조각, 마리수
+a = np.array([126, 234, 276, 326, 154, 174, 194, 264])
+item_counts = np.array([7.04, 8.4, 10.5, 11.6, 432 / 68, 383 / 53, 423 / 52, 446 / 48])
+mob_counts = np.array([n, n, n2, n2, n3, n3, n4, n5])
+
+# 데이터 병합
+all_a_values = np.concatenate([a, data_add_inven_2366485])
+all_item_counts = np.concatenate([item_counts, fourth_column_frags_values / 4])
+all_mob_counts = np.concatenate([mob_counts, sixth_column_values / 4])
+
+# p 골라보기
+p_values = np.linspace(0.0001, 0.001, 19)
+
+# 결과 저장
+optimal_b_values = []
+p_b_pairs = []
+
+# 각 p값에 대해 최적의 b를 찾음
+for p_fixed in p_values:
+    final_probabilities = all_item_counts / all_mob_counts
+
+    def final_probability_model(a, b):
+        return p_fixed * (1 + b * np.log10(a + 1))
+
+# 최소 자승법
+    popt, pcov = curve_fit(final_probability_model, all_a_values, final_probabilities, bounds=(0, np.inf))
+    optimal_b = popt[0]
+    optimal_b_values.append(optimal_b)
+    p_b_pairs.append((p_fixed, optimal_b))
+
+# 그래프 출력
+plt.plot(p_values, optimal_b_values, marker='o', linestyle='-', color='blue')
+plt.xlabel('fixed p Values')
+plt.ylabel('optimal b Values')
+plt.title('b Values for p')
+plt.show()
+for p, b in p_b_pairs:
+    print(f"p: {p:.5f}, b: {b:.5f}")
