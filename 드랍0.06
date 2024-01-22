@@ -67,10 +67,10 @@ plt.title('Final Probability Model')
 plt.legend()
 plt.show()
 
-# 각 a값에 대한 최종 확률 및 아이템 획득 수 계산 및 출력
+# 각 a값 최종 확률 및 출력
 for a_val, final_prob, item_count in zip(all_a_values, final_probabilities, all_item_counts):
     updated_final_prob = updated_final_probability_model(a_val)
-    updated_item_count = n * updated_final_prob  # 아이템 획득 수 계산
+    updated_item_count = n * updated_final_prob  
     #print("\nFor a = {:.2f}:".format(a_val))
     #print(f"Original Final Probability: {final_prob}")
     #print(f"Updated Final Probability: {updated_final_prob}")
