@@ -10,6 +10,6 @@ https://www.inven.co.kr/board/maple/5746/232328,
 https://www.inven.co.kr/board/maple/5974/3220174 상단2개, 댓글란2개
 표본 턱없이 부족 (편차가 커서)
 
-https://tinyurl.com/yobyrqrt 조각 드랍율 0.06%일경우 아드(x)로 바뀌는 드롭율(y)
+https://tinyurl.com/yqta9evq 조각 드랍율 0.06%일경우 아드(x)로 바뀌는 드롭율(y)
 
 b계수 조각확률당 예측 https://tinyurl.com/yq9zqcly
