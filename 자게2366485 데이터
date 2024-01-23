@@ -123,7 +123,7 @@ trend_column_values = np.array([1 if "유행" in line.split() else 0 for line in
 print("fourth_column_frags_values:", fourth_column_frags_values)
 print("sixth_column_values:", sixth_column_values)
 print("trend_column_values:", trend_column_values)
-data_add_inven_2366485 = [261 + 50 if trend == 1 else 261 for trend in trend_column_values]
+data_add_inven_2366485 = np.array([2.61 + 0.5 if trend == 1 else 2.61 for trend in trend_column_values])
 
 # 췤
 print("data_add_inven_2366485:", data_add_inven_2366485)
