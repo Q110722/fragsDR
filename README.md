@@ -2,6 +2,7 @@ a 아드, ~~최종배율 대신 스탯창 그대로인 100곱으로 하는게 �
 
 
 log는 밑이 10, 상태이상내성도 밑이 10입니다
+$p * (1 + b * log10(1+a))
 https://tinyurl.com/ylqh2rc8
 
 https://www.inven.co.kr/board/maple/5974/2366485,
