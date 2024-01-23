@@ -1,0 +1,58 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+# 주어진 데이터
+m = 9000
+m2 = 9500
+m3 = 1630 * 5
+m4 = 1760 * 5
+m5 = 1920 * 5
+
+x_values = np.array([1.26, 2.34, 2.76, 3.26, 1.54, 1.74, 1.94, 2.64])
+y_values = np.array([7.04 / m, 8.4 / m, 10.5 / m2, 11.6 / m2, 432 / 68 / m3, 383 / 53 / m3, 423 / 52 / m4, 446 / 48 / m5])
+a = x_values
+item_counts = np.array([7.04, 8.4, 10.5, 11.6, 432 / 68, 383 / 53, 423 / 52, 446 / 48])
+mob_counts = np.array([m, m, m2, m2, m3, m3, m4, m5])
+
+# 데이터 병합소
+all_a_values = np.concatenate([a, data_add_inven_2366485])
+all_item_counts = np.concatenate([item_counts, fourth_column_frags_values / 4])
+all_mob_counts = np.concatenate([mob_counts, sixth_column_values / 4])
+
+# 모델 함수
+def linear_model(x, a, b):
+    return a * (1 + b * x)
+
+# 추정
+initial_values = [0.05, 0]
+
+# curve_fit 함수를 사용하여 최적의 매개변수를 찾음
+params, covariance = curve_fit(linear_model, all_a_values, all_item_counts / all_mob_counts, p0=initial_values)
+
+# 최적 추출
+a_optimal, b_optimal = params
+
+# 결과 출력
+print(f'a: {a_optimal * 100}%')
+print(f'b: {b_optimal * 100}%')
+
+# 그래프 그리기
+plt.scatter(all_a_values, all_item_counts / all_mob_counts, label='Actual Data', color='blue')
+plt.plot(all_a_values, linear_model(all_a_values, a_optimal, b_optimal), label='Linear Regression', color='red')
+
+# a 값 선택, 해당 회귀선 값
+#아드 0%
+a_select = 0
+selected_a_regression_value = linear_model(a_select, a_optimal, b_optimal)
+plt.text(a[0], a_optimal, f'dropRate={a_select*100}%, drop={selected_a_regression_value*100:.5f}%', color='green', fontsize=10, va='bottom', ha='left')
+
+# 데이터의 중간값일 때의 회귀선 값에 대한 글자적기
+mid_a = np.median(all_a_values)
+mid_regression_value = linear_model(mid_a, a_optimal, b_optimal)
+plt.text(a[0], mid_regression_value, f'midRate={mid_a*100}%, drop={mid_regression_value*100:.5f}%', color='purple', fontsize=10, va='bottom', ha='left')
+
+plt.xlabel('a')
+plt.ylabel('Drop Probability')
+plt.legend()
+plt.show()
