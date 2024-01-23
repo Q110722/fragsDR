@@ -46,7 +46,7 @@ def updated_final_probability_model(a):
     return p_fixed * (1 + optimal_b * np.log10(a + 1))
 
 # 출력
-print(f"아드0% 조각드랍율 : {updated_final_probability_model(0)*100}%")
+print(f"아드0% 조각드랍율 가정 : {updated_final_probability_model(0)*100}%")
 print(f"Optimal b value: {optimal_b}")
 
 # 최종 확률 모델 그래프
@@ -67,12 +67,5 @@ plt.title('Final Probability Model')
 plt.legend()
 plt.show()
 
-# 각 a값 최종 확률 및 출력
-for a_val, final_prob, item_count in zip(all_a_values, final_probabilities, all_item_counts):
-    updated_final_prob = updated_final_probability_model(a_val)
-    updated_item_count = n * updated_final_prob  
-    #print("\nFor a = {:.2f}:".format(a_val))
-    #print(f"Original Final Probability: {final_prob}")
-    #print(f"Updated Final Probability: {updated_final_prob}")
-    #print(f"Original Item Count: {item_count}")
-    #print(f"Updated Item Count: {updated_item_count:.5f}")
+print(updated_final_probability_model(2.76)*100)
+print(updated_final_probability_model(3.26)*100)
