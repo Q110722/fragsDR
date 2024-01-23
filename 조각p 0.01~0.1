@@ -22,28 +22,28 @@ all_mob_counts = np.concatenate([mob_counts, sixth_column_values / 4])
 # p 골라보기
 p_values = np.linspace(0.0001, 0.001, 19)
 
-# 결과 저장
-optimal_b_values = []
-p_b_pairs = []
-
-# 각 p값에 대해 최적의 b를 찾음
+# 각 p 최적 b
 for p_fixed in p_values:
     final_probabilities = all_item_counts / all_mob_counts
 
     def final_probability_model(a, b):
         return p_fixed * (1 + b * np.log10(a + 1))
 
-# 최소 자승법
+    # 최소 자승법
     popt, pcov = curve_fit(final_probability_model, all_a_values, final_probabilities, bounds=(0, np.inf))
     optimal_b = popt[0]
-    optimal_b_values.append(optimal_b)
-    p_b_pairs.append((p_fixed, optimal_b))
 
-# 그래프 출력
-plt.plot(p_values, optimal_b_values, marker='o', linestyle='-', color='blue')
-plt.xlabel('fixed p Values')
-plt.ylabel('optimal b Values')
-plt.title('b Values for p')
-plt.show()
-for p, b in p_b_pairs:
-    print(f"p: {p:.5f}, b: {b:.5f}")
+    # 회귀선
+    a_values_for_plot = np.linspace(0, 4, 1000)
+    final_probabilities_for_plot = p_fixed * (1 + optimal_b * np.log10(a_values_for_plot + 1))
+    plt.plot(a_values_for_plot, final_probabilities_for_plot, label=f'p = {p_fixed:.5f}, b = {optimal_b:.5f}', color= 'red')
+
+    # 데이터
+    plt.scatter(all_a_values, final_probabilities, color='blue', alpha=0.25)
+
+    # 그래프 출력
+    plt.xlabel('item drop plus (a)')
+    plt.ylabel('final probability')
+    plt.title(f'final probability model for drop = {p_fixed*100:.5f}%')
+    plt.legend()
+    plt.show()
