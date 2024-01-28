@@ -1,3 +1,5 @@
+업로드된 pynb https://github.com/Q110722/fragsDR/blob/main/Untitled.ipynb
+
 a 아드, ~~최종배율 대신 스탯창 그대로인 100곱으로 하는게 전통 (%)~~  326%==3.26
 
 
